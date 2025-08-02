@@ -3,7 +3,7 @@ research_task:
     Conduct a thorough research about the customer and competitors in the context
     of {customer_domain}.
     Make sure you find any interesting and relevant information given the
-    current year is 2024.
+    current year is {current_year}.
     We are working with them on the following project: {project_description}.
   expected_output: >
     A complete report on the customer and their customers and competitors,

@@ -3,6 +3,7 @@ import logging
 import os
 import sys
 from typing import Any
+from datetime import datetime
 
 import yaml
 from dotenv import load_dotenv
@@ -17,7 +18,9 @@ logging.getLogger("LiteLLM").setLevel(logging.WARNING)
 
 def parse_input() -> dict[str, Any]:
     with open(input_yaml) as f:
-        return yaml.safe_load(f)
+        inputs = yaml.safe_load(f)
+    inputs['current_year'] = datetime.now().year
+    return inputs
 
 
 def run() -> None:
