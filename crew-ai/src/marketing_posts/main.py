@@ -19,7 +19,7 @@ logging.getLogger("LiteLLM").setLevel(logging.WARNING)
 def parse_input() -> dict[str, Any]:
     with open(input_yaml) as f:
         inputs = yaml.safe_load(f)
-    inputs['current_year'] = datetime.now().year
+    inputs['current_date'] = datetime.now().strftime("%Y-%m-%d")
     return inputs
 
 
