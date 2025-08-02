@@ -56,6 +56,17 @@ If you’d prefer to use OpenAI instead:
     docker compose -f compose.yaml -f compose.openai.yaml up
     ```
 
+If you’d prefer to use Gemini instead:
+
+1. Create a `secret.gemini-api-key` file with your Gemini API key:
+
+2. Restart the project with the Gemini configuration:
+
+    ```sh
+    docker compose down -v
+    docker compose -f compose.yaml -f compose.gemini.yaml up
+    ```
+
 ## ❓ What Can It Do?
 
 Give it a company and a project description — the agents will collaborate to produce a full marketing strategy:

@@ -5,9 +5,11 @@ import sys
 from typing import Any
 
 import yaml
+from dotenv import load_dotenv
 
 from marketing_posts.crew import MarketingPostsCrew
 
+load_dotenv()
 input_yaml = os.path.join(os.path.dirname(__file__), "config", "input.yaml")
 
 logging.getLogger("LiteLLM").setLevel(logging.WARNING)

@@ -1,6 +1,7 @@
 services:
   agents:
     environment:
+      - LLM_PROVIDER=openai
       - OPENAI_MODEL_NAME=gpt-4.1-mini
     secrets:
       - openai-api-key

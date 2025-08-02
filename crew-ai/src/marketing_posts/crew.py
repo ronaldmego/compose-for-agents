@@ -1,11 +1,12 @@
 from typing import List
-
+import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from pydantic import BaseModel, Field
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Uncomment the following line to use an example of a custom tool
 # from marketing_posts.tools.custom_tool import MyCustomTool
-from pydantic import BaseModel, Field
 
 from .tools import get_tools
 
@@ -53,12 +54,23 @@ class MarketingPostsCrew:
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
+    def __init__(self):
+        self.llm = None
+        if os.getenv("LLM_PROVIDER") == "gemini":
+            self.llm = ChatGoogleGenerativeAI(
+                model=os.getenv("GEMINI_MODEL_NAME"),
+                verbose=True,
+                temperature=0.7,
+                google_api_key=os.getenv("GEMINI_API_KEY"),
+            )
+
     @agent
     def lead_market_analyst(self) -> Agent:
         return Agent(
             config=self.agents_config["lead_market_analyst"],  # type: ignore
             tools=get_tools(),
             verbose=True,
+            llm=self.llm,
         )
 
     @agent
@@ -67,6 +79,7 @@ class MarketingPostsCrew:
             config=self.agents_config["chief_marketing_strategist"],  # type: ignore
             tools=get_tools(),
             verbose=True,
+            llm=self.llm,
         )
 
     @agent
@@ -74,6 +87,7 @@ class MarketingPostsCrew:
         return Agent(
             config=self.agents_config["creative_content_creator"],  # type: ignore
             verbose=True,
+            llm=self.llm,
         )
 
     @task
