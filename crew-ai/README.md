@@ -38,33 +38,43 @@ deliver a complete marketing strategy for the input project.
 
 # 🧠 Inference Options
 
-By default, this project uses [Docker Model Runner] to handle LLM inference locally — no internet
-connection or external API key is required.
+This project supports multiple LLM providers. You can choose between running a local model using Docker Model Runner (default), or using the OpenAI or Gemini APIs.
 
-If you’d prefer to use OpenAI instead:
+### Local Model (Qwen)
 
-1. Create a `secret.openai-api-key` file with your OpenAI API key:
+By default, this project uses [Docker Model Runner] to handle LLM inference locally with the Qwen model. No internet connection or external API key is required.
+
+To run with the local model, use the following command:
+```sh
+docker compose up --build
+```
+
+### OpenAI
+
+To use the OpenAI API, follow these steps:
+
+1.  Create a `secret.openai-api-key` file in the `crew-ai` directory with your OpenAI API key:
 
     ```plaintext
     sk-...
     ```
 
-2. Restart the project with the OpenAI configuration:
+2.  Run the project with the OpenAI configuration:
 
     ```sh
-    docker compose down -v
-    docker compose -f compose.yaml -f compose.openai.yaml up
+    docker compose -f compose.yaml -f compose.openai.yaml up --build
     ```
 
-If you’d prefer to use Gemini instead:
+### Gemini
 
-1. Create a `secret.gemini-api-key` file with your Gemini API key:
+To use the Gemini API, follow these steps:
 
-2. Restart the project with the Gemini configuration:
+1.  Create a `secret.gemini-api-key` file in the `crew-ai` directory with your Gemini API key.
+
+2.  Run the project with the Gemini configuration:
 
     ```sh
-    docker compose down -v
-    docker compose -f compose.yaml -f compose.gemini.yaml up
+    docker compose -f compose.yaml -f compose.gemini.yaml up --build
     ```
 
 ## ❓ What Can It Do?
