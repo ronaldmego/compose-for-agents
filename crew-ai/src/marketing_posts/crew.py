@@ -57,11 +57,17 @@ class MarketingPostsCrew:
     def __init__(self):
         self.llm = None
         if os.getenv("LLM_PROVIDER") == "gemini":
+            # Read API key from file if GEMINI_API_KEY_FILE is set
+            api_key = os.getenv("GEMINI_API_KEY")
+            if not api_key and os.getenv("GEMINI_API_KEY_FILE"):
+                with open(os.getenv("GEMINI_API_KEY_FILE"), "r") as f:
+                    api_key = f.read().strip()
+            
             self.llm = ChatGoogleGenerativeAI(
                 model=os.getenv("GEMINI_MODEL_NAME"),
                 verbose=True,
                 temperature=0.7,
-                google_api_key=os.getenv("GEMINI_API_KEY"),
+                google_api_key=api_key,
             )
 
     @agent

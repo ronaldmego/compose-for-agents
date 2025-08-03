@@ -3,6 +3,7 @@ services:
     environment:
       - LLM_PROVIDER=gemini
       - GEMINI_MODEL_NAME=gemini-1.5-flash-latest
+      - GEMINI_API_KEY_FILE=/run/secrets/gemini-api-key
     secrets:
       - gemini-api-key
 
